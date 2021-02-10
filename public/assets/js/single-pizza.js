@@ -15,7 +15,7 @@ function getPizza() {
     document.location.search.substring(1)
   );
   const pizzaId = searchParams.get("id");
-    console.log("working")
+  console.log("working");
   // get pizzaInfo
   fetch(`/api/pizzas/${pizzaId}`)
     .then((response) => {
@@ -138,19 +138,19 @@ function handleNewCommentSubmit(event) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(formData)
+    body: JSON.stringify(formData),
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
-      response.json()
+      response.json();
     })
-    .then(commentResponse => {
+    .then((commentResponse) => {
       console.log(commentResponse);
-      location.reload()
+      location.reload();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 }
@@ -172,6 +172,28 @@ function handleNewReplySubmit(event) {
   }
 
   const formData = { writtenBy, replyBody };
+
+  fetch(`/api/comments/${pizzaId}/${commentId}/`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      response.json();
+    })
+    .then((commentResponse) => {
+      console.log(commentResponse);
+      location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 $backBtn.addEventListener("click", function () {
