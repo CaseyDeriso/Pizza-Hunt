@@ -9,9 +9,15 @@ const replySchema = new Schema(
       default: () => new Types.ObjectId(),
     },
     replyBody: {
+      trim: true,
+      minLength: 2,
+      unique: true,
+      required: true,
       type: String,
     },
     writtenBy: {
+      minLength: 2,
+      required: true,
       type: String,
     },
     createdAt: {
@@ -30,9 +36,15 @@ const replySchema = new Schema(
 const CommentSchema = new Schema(
   {
     writtenBy: {
+      minLength: 2,
+      required: true,
       type: String,
     },
     commentBody: {
+      trim: true,
+      minLength: 2,
+      unique: true,
+      required: true,
       type: String,
     },
     replies: [replySchema],
