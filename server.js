@@ -16,6 +16,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/pizza-hunt", {
   useUnifiedTopology: true,
 });
 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, '---------connection error------------:'));
+db.once('open', function callback () {
+  console.log("********connection opened***********");
+});
+
 mongoose.set("debug", true);
 
 app.use(require("./routes"));
